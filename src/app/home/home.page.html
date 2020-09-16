@@ -1,20 +1,29 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title> test-inapp-webrtc </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-item class="ion-no-lines">
+    <ion-label position="floating">URL da Videochamada</ion-label>
+    <ion-input type="text" #inputURL></ion-input>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button color="primary" expand="block" (click)="openVideocall(inputURL.value)">
+          OPEN VIDEOCALL (InAppBrowser)
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button color="primary" expand="block" (click)="url = inputURL.value">
+          OPEN VIDEOCALL (iFrame)
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ng-container *ngIf="url">
+    <iframe [src]="sanitizeURL(url)"></iframe>
+  </ng-container>
 </ion-content>
